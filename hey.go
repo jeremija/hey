@@ -130,7 +130,7 @@ func main() {
 	var tlsCertificates []tls.Certificate = nil
 	var certPool *x509.CertPool = nil
 
-	if cert != nil && key != nil {
+	if *cert != "" && *key != "" {
 		certificate, err := tls.LoadX509KeyPair(*cert, *key)
 		if err != nil {
 			panic(fmt.Errorf("Failed to load TLS cert/key: %w", err))
@@ -139,7 +139,7 @@ func main() {
 		tlsCertificates = []tls.Certificate{certificate}
 	}
 
-	if ca != nil {
+	if *ca != "" {
 		certPool = x509.NewCertPool()
 		caBytes, err := os.ReadFile(*ca)
 		if err != nil {
